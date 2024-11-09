@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// This is your Prisma schema file
 
 generator client {
   provider = "prisma-client-js"
@@ -11,4 +7,120 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  uid        String   @id @default(cuid())
+  email      String   @unique
+  name       String?
+  password   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  vehicle    Vehicle?
+  feedbacks  Feedback[]
+  appointments Appointment[]
+}
+
+model Vehicle {
+  vid        String   @id @default(cuid())
+  registrationNo String @unique
+  model      String
+  color      String?
+  type       String
+  owner      User     @relation(fields: [ownerId], references: [uid])
+  ownerId    String   @unique
+  appointments Appointment[]
+  services   Service[]
+}
+
+model Service {
+  service_id     String   @id @default(cuid())
+  service_type   String
+  service_date   DateTime
+  est_end_date   DateTime
+  vehicle        Vehicle  @relation(fields: [vehicleId], references: [vid])
+  vehicleId      String
+  serviceCenter  ServiceCenter @relation(fields: [serviceCenterId], references: [service_center_id])
+  serviceCenterId String @unique
+  parts          Part[]
+  employees      Employee[]
+  invoices       Invoice[]
+}
+
+model Part {
+  part_id        String   @id @default(cuid())
+  price          Float
+  qty_in_stock   Int
+  qty_limit      Int
+  suppliers      Supplier[]
+  services       Service[]
+}
+
+model Supplier {
+  supplier_id    String   @id @default(cuid())
+  name           String
+  contact_info   String?
+  parts          Part[]
+}
+
+model Invoice {
+  invoice_id     String   @id @default(cuid())
+  amount         Float
+  payment_status String
+  invoice_date   DateTime
+  service        Service  @relation(fields: [serviceId], references: [service_id])
+  serviceId      String
+  payments       Payment[]
+}
+
+model Payment {
+  payment_id     String   @id @default(cuid())
+  amount         Float
+  payment_date   DateTime
+  payment_mode   String
+  invoice        Invoice  @relation(fields: [invoiceId], references: [invoice_id])
+  invoiceId      String
+}
+
+model Appointment {
+  appt_id        String   @id @default(cuid())
+  appt_date      DateTime
+  est_finish_date DateTime
+  status         String
+  vehicle        Vehicle  @relation(fields: [vehicleId], references: [vid])
+  vehicleId      String
+  customer       User     @relation(fields: [customerId], references: [uid])
+  customerId     String
+  feedback       Feedback?
+}
+
+model Feedback {
+  feedback_id    String   @id @default(cuid())
+  comments       String?
+  rating         Int
+  feedback_date  DateTime
+  appointment    Appointment @relation(fields: [appointmentId], references: [appt_id])
+  appointmentId  String     @unique
+  customer       User        @relation(fields: [customerId], references: [uid])
+  customerId     String
+}
+
+model Employee {
+  employee_id    String   @id @default(cuid())
+  name           String
+  phone_no       String
+  role           String
+  services       Service[]
+  service_center ServiceCenter @relation(fields: [serviceCenterId], references: [service_center_id])
+  serviceCenterId String
+}
+
+model ServiceCenter {
+  service_center_id String   @id @default(cuid())
+  name              String
+  address           String
+  phone_number      String
+  email             String
+  employees         Employee[]
+  services          Service[] 
 }
