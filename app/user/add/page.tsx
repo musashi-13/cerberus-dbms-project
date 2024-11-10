@@ -85,6 +85,8 @@ export default function Page() {
         return;
     }
     const uid = user?.userId
+
+    console.log(uid)
     try {
       const response = await ky.post('/api/add-vehicle', {
         headers: {
@@ -104,7 +106,7 @@ export default function Page() {
             <div className='flex flex-col bg-zinc-900/80 border border-neutral-500 backdrop-blur-sm mt-4 gap-2 p-4 rounded-md w-96 items-center'>
                 <h1 className='text-xl font-bold mb-2'>Register your Vehicle</h1>
                 <input value={registration} onChange={(e)=> setRegistration(e.target.value)} placeholder='Vehicle Registration Number' className='w-64 border-b-2 border-zinc-900/60 p-1 bg-transparent outline-none'/>
-                <input value={color} onChange={(e)=> setRegistration(e.target.value)} placeholder='Vehicle Color' className='w-64 border-b-2 border-zinc-900/60 p-1 bg-transparent outline-none'/>
+                <input value={color} onChange={(e)=> setColor(e.target.value)} placeholder='Vehicle Color' className='w-64 border-b-2 border-zinc-900/60 p-1 bg-transparent outline-none'/>
                 <div className='flex items-center'>
                     <p>Select the Model of</p>
                     <select onChange={(e) => setType(e.target.value)} className='w-16 border border-black p-1 bg-transparent border-none outline-none'>
