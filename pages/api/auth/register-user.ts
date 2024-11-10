@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
-import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
-const prisma = new PrismaClient();
+import prisma from '@/lib/prisma';
 
 export default async function registerUser(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') {

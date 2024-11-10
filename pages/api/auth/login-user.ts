@@ -1,9 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
-const prisma = new PrismaClient();
+import prisma from '@/lib/prisma';
 
 export default async function loginUser(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') {
@@ -42,5 +40,7 @@ export default async function loginUser(req: NextApiRequest, res: NextApiRespons
         return res.status(200).json({ token });
     } catch (error) {
         return res.status(500).json({ message: 'Internal server error' });
+    } finally {
+        await prisma.$disconnect();
     }
 }

@@ -1,27 +1,26 @@
 'use client'
 import secureLocalStorage from "react-secure-storage";
+import { useRouter } from "next/navigation";
+import ky from "ky";
 
 export default function Login() {
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.target as HTMLFormElement;
         const email = (form.elements.namedItem('email') as HTMLInputElement).value;
         const password = (form.elements.namedItem('password') as HTMLInputElement).value;
-
-        const response = await fetch('/api/auth/login-user', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        });
-
-        const data = await response.json();
-        
-        console.log(data);
-        const token = data.token;
-        secureLocalStorage.setItem('token', token);
+        try{
+            const response = await ky.post('/api/auth/login-user', {
+                json: { email, password },
+            }).json<{token: string}>();
+            const token = response.token;
+            secureLocalStorage.setItem('token', token);
+            router.push('/');
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return(
