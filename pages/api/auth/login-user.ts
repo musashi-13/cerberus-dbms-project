@@ -35,7 +35,7 @@ export default async function loginUser(req: NextApiRequest, res: NextApiRespons
             return res.status(500).json({ message: 'JWT secret is not defined' });
         }
 
-        const token = jwt.sign({ userId: user.uid }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user.uid, userName: user.name }, process.env.JWT_SECRET, {
             expiresIn: '1d',
         });
 
