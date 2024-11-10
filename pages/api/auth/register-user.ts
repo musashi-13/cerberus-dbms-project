@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+        import jwt from 'jsonwebtoken';
 import prisma from '@/lib/prisma';
 
 export default async function registerUser(req: NextApiRequest, res: NextApiResponse) {
@@ -42,5 +42,7 @@ export default async function registerUser(req: NextApiRequest, res: NextApiResp
         return res.status(200).json({ message: 'User created successfully', token });
     } catch (error) {
         return res.status(500).json({ message: 'Internal server error', error });
+    } finally {
+        await prisma.$disconnect();
     }
 }
