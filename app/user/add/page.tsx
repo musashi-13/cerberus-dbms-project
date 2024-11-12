@@ -103,7 +103,7 @@ export default function Page() {
   return (
     <div className="h-screen bg-garage-2 flex items-center justify-center">
         <form onSubmit={handleSubmit} className='flex flex-col items-center gap-2 w-full'>
-            <div className='flex flex-col bg-zinc-900/80 border border-neutral-500 backdrop-blur-sm mt-4 gap-2 p-4 rounded-md w-96 items-center'>
+            <div className='flex flex-col bg-zinc-900/80 border border-zinc-600 backdrop-blur-sm mt-4 gap-2 p-4 rounded-md w-96 items-center'>
                 <h1 className='text-xl font-bold mb-2'>Register your Vehicle</h1>
                 <input value={registration} onChange={(e)=> setRegistration(e.target.value)} placeholder='Vehicle Registration Number' className='w-64 border-b-2 border-zinc-900/60 p-1 bg-transparent outline-none'/>
                 <input value={color} onChange={(e)=> setColor(e.target.value)} placeholder='Vehicle Color' className='w-64 border-b-2 border-zinc-900/60 p-1 bg-transparent outline-none'/>
