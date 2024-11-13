@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/lib/prisma';
 
 export default async function bookAppt(req: NextApiRequest, res: NextApiResponse) {
-    const {uid, vid, date, stat, estEndDate } = req.body;
-    if(!uid || !vid || !date || !stat || !estEndDate){
+    const {uid, vid, date, stat, task } = req.body;
+    if(!uid || !vid || !date || !stat || !task){
         return res.status(400).json({ error: 'Invalid Prompt' });
     }
     try {
@@ -18,7 +18,7 @@ export default async function bookAppt(req: NextApiRequest, res: NextApiResponse
                 vehicleId: vid,
                 appt_date: date,
                 status: stat,
-                est_finish_date: estEndDate
+                task: task,    
             },
         });
 

@@ -33,7 +33,7 @@ export default async function getVehicles(req: NextApiRequest, res: NextApiRespo
         });
 
         if (vehicles.length === 0) {
-            return res.status(404).json({ message: 'No vehicles found for this user' });
+            return res.status(201).json({ message: 'No vehicles found for this user' });
         }
 
         return res.status(200).json({ vehicles });

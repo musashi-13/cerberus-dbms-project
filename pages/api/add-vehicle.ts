@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma';
 
 export default async function addVehicle(req: NextApiRequest, res: NextApiResponse) {
     const { uid, registration, color, type, model } = req.body;
+    console.log(req.body);
     if (!uid || !registration || !color || !type || !model) {
         return res.status(400).json({ error: 'Invalid Prompt' });
     }
