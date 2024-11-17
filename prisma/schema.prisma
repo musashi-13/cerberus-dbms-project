@@ -23,15 +23,15 @@ model User {
 }
 
 model Vehicle {
-  vid        String   @id @default(cuid())
-  registrationNo String @unique
-  model      String
-  color      String?
-  type       String
-  owner      User     @relation(fields: [ownerId], references: [uid])
-  ownerId    String   
-  appointments Appointment[]
-  services   Service[]
+  vid             String   @id @default(cuid())
+  registrationNo  String   @unique
+  model           String
+  color           String?
+  type            String
+  owner           User      @relation(fields: [ownerId], references: [uid], onDelete: Cascade)
+  ownerId         String
+  appointments    Appointment[]
+  services        Service[]
 }
 
 model Service {
@@ -84,28 +84,28 @@ model Payment {
 }
 
 model Appointment {
-  appt_id        String   @id @default(cuid())
-  appt_date      DateTime
+  appt_id         String   @id @default(cuid())
+  appt_date       DateTime
   est_finish_date DateTime?
-  status         String
-  task           String
+  status          String
+  task            String
   service_comments String?
-  vehicle        Vehicle  @relation(fields: [vehicleId], references: [vid])
-  vehicleId      String
-  customer       User     @relation(fields: [customerId], references: [uid])
-  customerId     String
-  feedback       Feedback?
+  vehicle         Vehicle?  @relation(fields: [vehicleId], references: [vid], onDelete: Cascade)
+  vehicleId       String?
+  customer        User      @relation(fields: [customerId], references: [uid], onDelete: Cascade)
+  customerId      String
+  feedback        Feedback?
 }
 
 model Feedback {
-  feedback_id    String   @id @default(cuid())
-  comments       String?
-  rating         Int
-  feedback_date  DateTime   @default(now())
-  appointment    Appointment @relation(fields: [appointmentId], references: [appt_id])
-  appointmentId  String     @unique
-  customer       User        @relation(fields: [customerId], references: [uid])
-  customerId     String
+  feedback_id     String   @id @default(cuid())
+  comments        String?
+  rating          Int
+  feedback_date   DateTime @default(now())
+  appointment     Appointment @relation(fields: [appointmentId], references: [appt_id], onDelete: Cascade)
+  appointmentId   String     @unique
+  customer        User      @relation(fields: [customerId], references: [uid], onDelete: Cascade)
+  customerId      String
 }
 
 model Employee {
