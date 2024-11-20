@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import ky from "ky";
 import { useState } from "react";
 import Icon from "@/app/_components/icon-wrapper";
+import Link from "next/link";
 
 export default function EmployeeLogin() {
     const router = useRouter();
@@ -46,6 +47,8 @@ export default function EmployeeLogin() {
                     name="password" 
                     placeholder="Password" 
                 />
+                <Link href={'/employee/register'} className="text-xs text-zinc-400 w-64 text-right">New Employee? <u>Register</u></Link>
+                
                 <button 
                     disabled={isLoading} 
                     type="submit" 
