@@ -34,7 +34,7 @@ export default function EmployeeHomePage() {
 
       try {
         const response = await ky
-          .get(`/api/get-employee-appointments?userId=${user.userId}`, {
+          .get(`/api/get-employee-appointments`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -57,7 +57,7 @@ export default function EmployeeHomePage() {
   const handleAppointmentAction = async (apptId: string, action: 'accept' | 'decline' | 'start-servicing' | 'complete') => {
     try {
       const token = secureLocalStorage.getItem("token");
-      await ky.post('/api/accept-decline-appointments', {
+      await ky.post('/api/accept-decline-appointment', {
         json: { apptId, action },
         headers: {
           Authorization: `Bearer ${token}`,
