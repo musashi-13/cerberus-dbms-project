@@ -42,6 +42,7 @@ export default function Page() {
             }).json();
 
             console.log('Feedback submitted:', response);
+            alert("Feedback added successfully")
         } catch (error) {
             console.error('Error submitting feedback:', error);
         }

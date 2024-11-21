@@ -128,7 +128,7 @@ export default function EmployeeHomePage() {
                         <td className="p-3">{appt.service_comments || "No comments"}</td>
                         <td className="p-3">
                           {/* Display buttons based on status */}
-                          {appt.status === 'Pending' && (
+                          {appt.status === 'pending approval' && (
                             <div className="flex flex-col gap-2">
                               <button 
                                 onClick={() => handleAppointmentAction(appt.appt_id, 'accept')}

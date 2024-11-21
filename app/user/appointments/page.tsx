@@ -38,7 +38,7 @@ export default function Page() {
   }, [user]);
 
   return (
-    <div className="bg-garage h-screen flex flex-col items-center p-6">
+    <div className="bg-garage h-screen flex flex-col gap-2 items-center p-6">
       {loading ? (
       <div><Loader/></div>
       ) : appts && appts.length > 0 ? (

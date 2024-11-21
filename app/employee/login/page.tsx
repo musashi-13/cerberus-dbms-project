@@ -15,15 +15,14 @@ export default function EmployeeLogin() {
         setIsLoading(true);
         const form = e.target as HTMLFormElement;
         const employeeId = (form.elements.namedItem('employeeId') as HTMLInputElement).value;
-        const password = (form.elements.namedItem('password') as HTMLInputElement).value;
         
         try {
             const response = await ky.post('/api/auth/login-employee', {
-                json: { employee_id: employeeId, password },
+                json: { employee_id: employeeId },
             }).json<{ token: string }>();
             const token = response.token;
             secureLocalStorage.setItem('token', token);
-            router.push('/employee-dashboard');
+            router.push('/employee/home');
         } catch (error) {
             console.error(error);
         } finally {
@@ -41,14 +40,6 @@ export default function EmployeeLogin() {
                     name="employeeId" 
                     placeholder="Employee ID" 
                 />
-                <input 
-                    className="w-64 border-b-2 border-zinc-600/60 p-1 bg-transparent outline-none" 
-                    type="password" 
-                    name="password" 
-                    placeholder="Password" 
-                />
-                <Link href={'/employee/register'} className="text-xs text-zinc-400 w-64 text-right">New Employee? <u>Register</u></Link>
-                
                 <button 
                     disabled={isLoading} 
                     type="submit" 

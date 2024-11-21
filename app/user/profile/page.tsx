@@ -52,6 +52,7 @@ export default function Page() {
             json: { userId: user.userId },
           })
           .json();
+          setVehicles(response.vehicles)
       } catch (error) {
         console.error("Error fetching vehicles:", error);
       } finally {
@@ -162,6 +163,7 @@ export default function Page() {
       });
       setUserDetails(editValues); // Update original details with the saved values
       setIsModified(false); // Disable the save button
+      alert("Your profile details have been updated")
     } catch (error) {
       console.error("Error updating profile:", error);
     }

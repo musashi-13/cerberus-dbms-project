@@ -3,6 +3,7 @@ import vehicles from '@/lib/vehicles';
 import { useState, useRef, useEffect } from 'react';
 import ky from 'ky';
 import { useAuth } from '@/app/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const [type, setType] = useState('car');
@@ -11,7 +12,7 @@ export default function Page() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
-
+  const router = useRouter()
   const currentVehicles = type === 'bike' ? vehicles.bikes : vehicles.cars;
   
   useEffect(() => {
@@ -95,6 +96,8 @@ export default function Page() {
         body: JSON.stringify({ uid, registration, color, type, model }),
       }).json();
       console.log(response);
+      alert("Vehicle Added Successfully")
+      router.push('/')
     } catch (error) {
       console.error(error);
     }

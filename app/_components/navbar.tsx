@@ -36,6 +36,7 @@ export default function Navbar() {
             </div>
             ) : (
             <div className="flex gap-2">
+                <Link href="/admin" className="underline px-2 py-1">Admin</Link>
                 <Link href="/employee/login" className="underline px-2 py-1">Staff</Link>
                 <Link href="/user/login" className="bg-gradient-to-r from-amber-600 to-orange-600 px-2 py-1 rounded-md">Login</Link>
                 <Link href="/user/register" className="border border-zinc-600 px-2 py-1 rounded-md">Register</Link>

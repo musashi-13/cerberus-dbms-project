@@ -28,5 +28,7 @@ export default async function updateProfile(req: NextApiRequest, res: NextApiRes
     } catch (error) {
         console.error('Error updating profile:', error);
         res.status(500).json({ error: 'Internal server error' });
+    } finally {
+        prisma.$disconnect
     }
 }

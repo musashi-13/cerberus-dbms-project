@@ -8,9 +8,9 @@ export default async function loginStaff(req: NextApiRequest, res: NextApiRespon
         return res.status(405).json({ message: 'Method not allowed' });
     }
 
-    const { employee_id, password } = req.body;
+    const { employee_id } = req.body;
 
-    if (!employee_id || !password) {
+    if (!employee_id) {
         return res.status(400).json({ message: 'Employee ID and password are required' });
     }
 
@@ -20,12 +20,6 @@ export default async function loginStaff(req: NextApiRequest, res: NextApiRespon
         });
 
         if (!staff) {
-            return res.status(401).json({ message: 'Invalid employee ID or password' });
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, staff.password);
-
-        if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid employee ID or password' });
         }
 
