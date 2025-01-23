@@ -47,5 +47,5 @@
 
 #### Pending Implementation
 
-- [x] Create employee, parts management, and a few more features
-- [x] Bug Fixing
+- [ ] Create employee, parts management, and a few more features
+- [ ] Bug Fixing
