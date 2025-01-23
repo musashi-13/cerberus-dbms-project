@@ -57,7 +57,7 @@ export default function EmployeeHomePage() {
   const handleAppointmentAction = async (apptId: string, action: 'accept' | 'decline' | 'start-servicing' | 'complete') => {
     try {
       const token = secureLocalStorage.getItem("token");
-      await ky.post('/api/accept-decline-appointment', {
+      await ky.post('/api/accept-decline-appointments', {
         json: { apptId, action },
         headers: {
           Authorization: `Bearer ${token}`,
