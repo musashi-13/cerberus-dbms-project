@@ -20,7 +20,7 @@
 * Migrate the schema to your database
     * `pnpm prisma migrate dev`
 * Run the project
-    `pnpm dev`
+    * `pnpm dev`
 
 ## Nextjs Database system - project checklist
 
