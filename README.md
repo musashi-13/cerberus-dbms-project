@@ -1,9 +1,8 @@
 # Sem 5 DBMS project using Next.js and Prisma
 
 ## Team Members
-* PES1UG22CS264 - K N Sunav - [musashi-13](https://github.com/muasashi-13)
-* PES1UG22CS275 - Karan Prasad Hathwar - [Sunavkn](https://github.com/Sunavkn)
-
+* PES1UG22CS264 - K N Sunav -  [Sunavkn](https://github.com/Sunavkn)
+* PES1UG22CS275 - Karan Prasad Hathwar - [musashi-13](https://github.com/muasashi-13)
 
 ## Problem statement
 
